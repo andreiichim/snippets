@@ -1,7 +1,16 @@
 # Snippets
 
 ## Geometry
-
+Input parameters:
+  - points: pA, pB, pC, pD
+  - vectors:
+    - vAB = pB-pA
+  - lines: defined by two points: AB
+  - planes:
+    - defined by three points: ABC
+    - defined by one point and two vectors: pP, vAB, vAC
+    - defined by a point and a normal: pA, pN
+    
 ### Magnitude
 Returns the lenght of the vector.
 
