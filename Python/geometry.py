@@ -1,51 +1,80 @@
 
 import math
 
-# Magnitude of vector v
-def magnitude(v):
-    return math.sqrt(sum(v[i]*v[i] for i in range(len(v))))
+# Magnitude of vector vAB
+def magnitude(vAB):
+    return math.sqrt(sum(vAB[i]*vAB[i] for i in range(len(vAB))))
 
-# u + v
-def add(u, v):
-    return [ u[i]+v[i] for i in range(len(u)) ]
+# vAB + vCD
+def add(vAB, vCD):
+    return [ vAB[i]+vCD[i] for i in range(len(vAB)) ]
 
-# u - v
-def sub(u, v):
-    return [ u[i]-v[i] for i in range(len(u)) ]
+# vAB - vCD
+def sub(vAB, vCD):
+    return [ vAB[i]-vCD[i] for i in range(len(vAB)) ]
 
-# v * constant c
-def mul(v, c):
-    return [ i*c for i in v ]
+# vAB * constant c
+def mul(vAB, c):
+    return [ i*c for i in vAB ]
 
-# Dot product of u and v
-def dot(u, v):
-    return sum( u[i]*v[i] for i in range(len(u)) )
+# Dot product of vector vAB and vector vCD
+def dot(vAB, vCD):
+    return sum( vAB[i]*vCD[i] for i in range(len(vAB)) )
 
-# Normalize vector v
-def normalize(v):
-    vmag = magnitude(v)
-    return [ v[i]/vmag  for i in range(len(v)) ]
+def cross(vAB, vCD):
+    r = []
+    for i in range(len(vAB)):
+        if i == 0:
+            j,k = 1,2
+            r.append(vAB[j]*vCD[k] - vAB[k]*vCD[j])
+        elif i == 1:
+            j,k = 2,0
+            r.append(vAB[j]*vCD[k] - vAB[k]*vCD[j])
+        else:
+            j,k = 0,1
+            r.append(vAB[j]*vCD[k] - vAB[k]*vCD[j])
+    return r
 
-# Distance between point a and point b
-def distance(a, b):
-    return math.sqrt ( sum( [ a[i]-b[i])**2 for i in range(len(a)) ] ) )
+# Normalize vector vAB
+def normalize(vAB):
+    vmag = magnitude(vAB)
+    return [ vAB[i]/vmag  for i in range(len(vAB)) ]
 
-# Projection of point c on the line between point a and point b
-def point_line_projection(a, b, c):
-    ba = sub(b, a)
-    ca = sub(c, a)
-    d = dot(normalize(ba), normalize(ca))
-    return magnitude( add( a,( mul( ba,( d*(magnitude(ca)/magnitude(ba)) ) ) ) ) )
+# Plane normal
+def plane_normal():
+    return normalize (cross(vAB, vAC))
 
-# Intersection between a line (defined by linePoint and lineVector) and a plane (defined by planePoint and planeNormal)
-def plane_line_intersect(planePoint, planeNormal, linePoint, lineVector):
-    lineVector = normalize(lineVector)
-    d1 = dot(sub(planePoint, linePoint), planeNormal)
-    d2 = dot(lineVector, planeNormal)
+# Distance between point pA and point pB
+def distance(pA, pB):
+    return math.sqrt ( sum( [ pA[i]-pB[i])**2 for i in range(len(pA)) ] ) )
+
+# Point at along% (0-1) between points pA and pB
+def alongPoint(pA, pB, along):
+    return add( pA, ( mul(sub(pB, pA), along) ) )
+
+# Projection of point pC on the line between point pA and point pB
+def point_line_projection(pA, pB, pC):
+    vAB = sub(pB, pA)
+    vAC = sub(pC, pA)
+    d = dot(normalize(vAB), normalize(vAC))
+    return magnitude( add( pA,( mul( vAB,( d*(magnitude(vAC)/magnitude(vAB)) ) ) ) ) )
+
+# Distance between point pC and the line between point pA and point pB
+def point_line_distance(pA, pB, pC):
+    return distance(pC, (pointLineProj(pA, pB, pC)) )
+
+def is_point_on_line(pA, pB, pC, tolerance):
+    return (point_line_distance(pA, pB, pC) <= tolerance)
+
+# Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
+def plane_line_intersect(pP, pN, pA, vAB):
+    vAB = normalize(vAB)
+    d1 = dot(sub(pP, pA), pN)
+    d2 = dot(vAB, pN)
     if abs(d2) < 0.0000000754:
         if abs(d1)> 0.0000000754:
             return 0
         else:
             return -1
     else:
-        return add(linePoint, [v*(d1/d2) for v in lineVector])
+        return add(pA, [v*(d1/d2) for v in vAB])
