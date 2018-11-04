@@ -41,12 +41,12 @@ def normalize(vAB):
     return [ vAB[i]/vmag  for i in range(len(vAB)) ]
 
 # Plane normal
-def plane_normal():
-    return normalize (cross(vAB, vAC))
+def plane_normal(vAB, vAC):
+    return normalize(cross(vAB, vAC))
 
 # Distance between point pA and point pB
 def distance(pA, pB):
-    return math.sqrt ( sum( [ pA[i]-pB[i])**2 for i in range(len(pA)) ] ) )
+    return math.sqrt ( sum( [ (pA[i]-pB[i])**2 for i in range(len(pA)) ] ) )
 
 # Point at along% (0-1) between points pA and pB
 def alongPoint(pA, pB, along):
@@ -57,11 +57,11 @@ def point_line_projection(pA, pB, pC):
     vAB = sub(pB, pA)
     vAC = sub(pC, pA)
     d = dot(normalize(vAB), normalize(vAC))
-    return magnitude( add( pA,( mul( vAB,( d*(magnitude(vAC)/magnitude(vAB)) ) ) ) ) )
+    return add( pA,( mul( vAB,( d*(magnitude(vAC)/magnitude(vAB)) ) ) ) )
 
 # Distance between point pC and the line between point pA and point pB
 def point_line_distance(pA, pB, pC):
-    return distance(pC, (pointLineProj(pA, pB, pC)) )
+    return distance(pC, (point_line_projection(pA, pB, pC)) )
 
 def is_point_on_line(pA, pB, pC, tolerance):
     return (point_line_distance(pA, pB, pC) <= tolerance)
@@ -78,3 +78,24 @@ def plane_line_intersect(pP, pN, pA, vAB):
             return -1
     else:
         return add(pA, [v*(d1/d2) for v in vAB])
+
+
+def unit_test():
+    print ('magnitude([1,2,3]): ', magnitude([1,2,3]))
+    print ('add([1,2,3],[4,5,6]): ', add([1,2,3],[4,5,6]))
+    print ('sub([1,2,3],[4,5,6]): ', sub([1,2,3],[4,5,6]))
+    print ('mul([1,2,3], 0.5): ', mul([1,2,3], 0.5))
+    print ('dot([1,2,3],[4,5,6]): ', dot([1,2,3],[4,5,6]))
+    print ('cross([1,2,3],[4,5,6]): ', cross([1,2,3],[4,5,6]))
+    print ('normalize([1,2,3]): ', normalize([1,2,3]))
+    print ('plane_normal([1,2,3],[4,5,6]): ', plane_normal([1,2,3],[4,5,6]))
+    print ('distance([1,2,3],[4,5,6]): ', distance([1,2,3],[4,5,6]))
+    print ('alongPoint([1,2,3], [4,5,6], 0.5): ', alongPoint([1,2,3], [4,5,6], 0.5))
+    print ('point_line_projection([1,2,3], [4,5,6], [1,5,3]): ', point_line_projection([1,2,3], [4,5,6], [1,5,3]))
+    print ('point_line_distance([1,2,3],[4,5,6],[1,5,3]): ', point_line_distance([1,2,3],[4,5,6],[1,5,3]))
+    print ('is_point_on_line([1,2,3],[4,5,6],[7,8,9]): ', is_point_on_line([1,2,3],[4,5,6],[7,8,9],0.1))
+    print ('is_point_on_line([1,2,3],[4,5,6],[1,5,3]): ', is_point_on_line([1,2,3],[4,5,6],[1,5,3],0.1))
+    print ('plane_line_intersect([1,2,3],[1,0,0],[1,2,3],[4,5,6]): ', plane_line_intersect([1,2,3],[1,0,0],[1,2,3],[4,5,6]))
+
+if __name__ == '__main__':
+    unit_test()
