@@ -21,6 +21,7 @@ def mul(vAB, c):
 def dot(vAB, vCD):
     return sum( vAB[i]*vCD[i] for i in range(len(vAB)) )
 
+# Dot product of vector vAB and vector vCD
 def cross(vAB, vCD):
     r = []
     for i in range(len(vAB)):
@@ -40,9 +41,9 @@ def normalize(vAB):
     vmag = magnitude(vAB)
     return [ vAB[i]/vmag  for i in range(len(vAB)) ]
 
-# Plane normal
-def plane_normal(vAB, vAC):
-    return normalize(cross(vAB, vAC))
+# Plane normal defined by three points
+def plane_normal(pA, pB, pC):
+    return normalize( cross( sub(pB,pA), sub(pC,pA) ) )
 
 # Distance between point pA and point pB
 def distance(pA, pB):
@@ -79,7 +80,6 @@ def plane_line_intersect(pP, pN, pA, vAB):
     else:
         return add(pA, [v*(d1/d2) for v in vAB])
 
-
 def unit_test():
     print ('magnitude([1,2,3]): ', magnitude([1,2,3]))
     print ('add([1,2,3],[4,5,6]): ', add([1,2,3],[4,5,6]))
@@ -88,7 +88,7 @@ def unit_test():
     print ('dot([1,2,3],[4,5,6]): ', dot([1,2,3],[4,5,6]))
     print ('cross([1,2,3],[4,5,6]): ', cross([1,2,3],[4,5,6]))
     print ('normalize([1,2,3]): ', normalize([1,2,3]))
-    print ('plane_normal([1,2,3],[4,5,6]): ', plane_normal([1,2,3],[4,5,6]))
+    print ('plane_normal([1,2,3],[4,5,6],[1,5,3]): ', plane_normal([1,2,3],[4,5,6],[1,5,3]))
     print ('distance([1,2,3],[4,5,6]): ', distance([1,2,3],[4,5,6]))
     print ('alongPoint([1,2,3], [4,5,6], 0.5): ', alongPoint([1,2,3], [4,5,6], 0.5))
     print ('point_line_projection([1,2,3], [4,5,6], [1,5,3]): ', point_line_projection([1,2,3], [4,5,6], [1,5,3]))
