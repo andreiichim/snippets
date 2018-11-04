@@ -41,7 +41,7 @@ def normalize(vAB):
     vmag = magnitude(vAB)
     return [ vAB[i]/vmag  for i in range(len(vAB)) ]
 
-# Plane normal defined by three points
+# Normal of a plane defined by three points
 def plane_normal(pA, pB, pC):
     return normalize( cross( sub(pB,pA), sub(pC,pA) ) )
 
@@ -64,6 +64,7 @@ def point_line_projection(pA, pB, pC):
 def point_line_distance(pA, pB, pC):
     return distance(pC, (point_line_projection(pA, pB, pC)) )
 
+# Check if point pC is on the line between point pA and point pB with tolerance
 def is_point_on_line(pA, pB, pC, tolerance):
     return (point_line_distance(pA, pB, pC) <= tolerance)
 
