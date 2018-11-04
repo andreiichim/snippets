@@ -74,7 +74,7 @@ def plane_line_intersect(pP, pN, pA, vAB):
     d1 = dot(sub(pP, pA), pN)
     d2 = dot(vAB, pN)
     if abs(d2) < 0.0000000754:
-        if abs(d1)> 0.0000000754:
+        if abs(d1) > 0.0000000754:
             return 0
         else:
             return -1

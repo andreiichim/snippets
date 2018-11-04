@@ -29,12 +29,11 @@ fn pointLineProj pA pB pC =
 	return (pA+(vAB*(d*(length vAC/length vAB))))
 )
   
--- Intersection between a line (defined by linePoint and lineVector) and a plane (defined by planePoint and planeNormal)
-fn planeLineIntersect planePoint planeNormal linePoint lineVector = 
-(
-	local lineVector = normalize lineVector
-	local d1 = dot (planePoint-linePoint) planeNormal
-	local d2 = dot lineVector planeNormal
+-- Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
+fn plane_line_intersect pP pN pA vAB =
+    local vAB = normalize vAB
+    local d1 = dot (pP-pA) pN
+    local d2 = dot vAB pN
 	if abs(d2) < 0.0000000754 then
 	(
 		if abs(d1) > 0.0000000754 then return 0
@@ -42,6 +41,5 @@ fn planeLineIntersect planePoint planeNormal linePoint lineVector =
 	)
 	else
 	(
-		return linePoint + ( (d1/d2)*lineVector )
+		return pA + (d1/d2) * vAB
 	)
-)
