@@ -2,10 +2,10 @@ import sys
 from PySide import QtGui
 from PySide import QtCore
 
-class Basic_UI(QtGui.QMainWindow):
+class BasicUI(QtGui.QMainWindow):
 
     def __init__(self):
-        super(Basic_UI, self).__init__()
+        super(BasicUI, self).__init__()
         
         # Init Layout
         self.layout = QtGui.QVBoxLayout()
@@ -31,7 +31,7 @@ class Basic_UI(QtGui.QMainWindow):
         self.setCentralWidget(self.label)
 
         # Set layout
-        self.setWindowTitle('Basic_UI')
+        self.setWindowTitle('BasicUI')
         self.setLayout(self.layout)
 
         self.statusBar().showMessage('Ready')
@@ -41,6 +41,6 @@ class Basic_UI(QtGui.QMainWindow):
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    main_window = Basic_UI()
+    main_window = BasicUI()
     main_window.show()
     sys.exit(app.exec_())
