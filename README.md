@@ -1,9 +1,10 @@
 # Snippets
 
 ## Geometry
-  - Maxscript
-  - Python
-  - VEX
+  - [ ] _Maxscript_
+  - [x] Python
+  - [ ] VEX
 
 ## BasicUI
-  - PySide
+  - [x] PySide
+  - [ ] PySide2
