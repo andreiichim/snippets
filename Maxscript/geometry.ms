@@ -2,37 +2,37 @@
 -- Magnitude of vector vAB.
 -- Redundant function, added for consistency.
 fn magnitude vAB=
-	return length vAB
+    return length vAB
 
 -- vAB + vCD. Implemented in maxscript as '+'
 -- Redundant function, added for consistency.
 fn add_ms vAB vCD=
-	return vAB+vCD
+    return vAB+vCD
 
 -- vAB - vCD. Implemented in maxscript as '-'
 -- Redundant function, added for consistency.
 fn sub vAB vCD=
-	return vAB-vCD
+    return vAB-vCD
 
 -- vAB * constant c. Implemented in maxscript as '*'
 -- Redundant function, added for consistency.
 fn mul vAB c=
-	return vAB*c
+    return vAB*c
 
 --  Dot product of vector vAB and vector vCD. Implemented in maxscript as 'dot'
 -- Redundant function, added for consistency.
 fn dot_ms vAB vCD=
-	return dot vAB vCD
+    return dot vAB vCD
 
 --  Cross product of vector vAB and vector vCD. Implemented in maxscript as 'cross'
 -- Redundant function, added for consistency.
 fn cross_ms vAB vCD=
-	return cross vAB vCD
+    return cross vAB vCD
 
 -- Normalize vector vAB
 -- Redundant function, added for consistency.
 fn normalize_ms vAB=
-	return normalize vAB
+    return normalize vAB
 
 -- Normal of a plane defined by three points pA, pB, pC
 fn plane_normal pA pB pC=
@@ -50,10 +50,10 @@ fn alongPoint pA pB along=
 -- Projection of point pC on the line between point pA and point pB
 fn point_line_projection pA pB pC =
 (
-	local vAB = pB-pA
-	local vAC = pC-pA
-	local d = dot (normalize vAB) (normalize vAC)
-	return (pA+(vAB*(d*(length vAC/length vAB))))
+    local vAB = pB-pA
+    local vAC = pC-pA
+    local d = dot (normalize vAB) (normalize vAC)
+    return (pA+(vAB*(d*(length vAC/length vAB))))
 )
 
 -- Distance between point pC and the line between point pA and point pB
@@ -70,20 +70,20 @@ fn plane_line_intersect pP pN pA vAB =
     local vAB = normalize vAB
     local d1 = dot (pP-pA) pN
     local d2 = dot vAB pN
-	if abs(d2) < 0.0000000754 then
-	(
-		if abs(d1) > 0.0000000754 then return 0
-		else return -1
-	)
-	else
-	(
-		return pA + (d1/d2) * vAB
-	)
+    if abs(d2) < 0.0000000754 then
+    (
+        if abs(d1) > 0.0000000754 then return 0
+        else return -1
+    )
+    else
+    (
+        return pA + (d1/d2) * vAB
+    )
 )
 
 fn unit_test=
 (
-	print ("magnitude [1,2,3]: " + magnitude [1,2,3] as string)
+    print ("magnitude [1,2,3]: " + magnitude [1,2,3] as string)
     print ("add_ms [1,2,3] [4,5,6]: " + add_ms [1,2,3] [4,5,6] as string)
     print ("sub [1,2,3] [4,5,6]: " + (sub [1,2,3] [4,5,6]) as string)
     print ("mul [1,2,3] 0.5: " + (mul [1,2,3] 0.5) as string)
