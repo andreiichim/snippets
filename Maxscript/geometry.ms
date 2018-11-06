@@ -1,35 +1,36 @@
 
--- Magnitude of vector vAB. Implemented in maxscript as 'length'
--- Redundant function, for consistency.
+-- Magnitude of vector vAB.
+-- Redundant function, added for consistency.
 fn magnitude vAB=
 	return length vAB
 
 -- vAB + vCD. Implemented in maxscript as '+'
--- Redundant function, for consistency.
+-- Redundant function, added for consistency.
 fn add_ms vAB vCD=
 	return vAB+vCD
 
 -- vAB - vCD. Implemented in maxscript as '-'
--- Redundant function, for consistency.
+-- Redundant function, added for consistency.
 fn sub vAB vCD=
 	return vAB-vCD
 
 -- vAB * constant c. Implemented in maxscript as '*'
--- Redundant function, for consistency.
+-- Redundant function, added for consistency.
 fn mul vAB c=
 	return vAB*c
 
 --  Dot product of vector vAB and vector vCD. Implemented in maxscript as 'dot'
--- Redundant function, for consistency.
+-- Redundant function, added for consistency.
 fn dot_ms vAB vCD=
 	return dot vAB vCD
 
 --  Cross product of vector vAB and vector vCD. Implemented in maxscript as 'cross'
--- Redundant function, for consistency.
+-- Redundant function, added for consistency.
 fn cross_ms vAB vCD=
 	return cross vAB vCD
 
 -- Normalize vector vAB
+-- Redundant function, added for consistency.
 fn normalize_ms vAB=
 	return normalize vAB
 
@@ -38,6 +39,7 @@ fn plane_normal pA pB pC=
     return normalize( cross (pB-pA) (pC-pA) )
 
 -- Distance between point pA and point pB
+-- Redundant function, added for consistency.
 fn distance_ms pA pB=
     return distance pA pB
 
