@@ -3,7 +3,7 @@
 ## Geometry
   - [x] _Maxscript_
   - [x] Python
-  - [ ] VEX
+  - [x] VEX
 
 ## BasicUI
   - [x] PySide
