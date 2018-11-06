@@ -1,7 +1,7 @@
 # Snippets
 
 ## Geometry
-  - [x] _Maxscript_
+  - [x] Maxscript
   - [x] Python
   - [x] VEX
 
