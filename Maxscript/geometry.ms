@@ -1,47 +1,7 @@
 
--- Magnitude of vector vAB.
--- Redundant function, added for consistency.
-fn magnitude vAB=
-    return length vAB
-
--- vAB + vCD. Implemented in maxscript as '+'
--- Redundant function, added for consistency.
-fn add_ms vAB vCD=
-    return vAB+vCD
-
--- vAB - vCD. Implemented in maxscript as '-'
--- Redundant function, added for consistency.
-fn sub vAB vCD=
-    return vAB-vCD
-
--- vAB * constant c. Implemented in maxscript as '*'
--- Redundant function, added for consistency.
-fn mul vAB c=
-    return vAB*c
-
---  Dot product of vector vAB and vector vCD. Implemented in maxscript as 'dot'
--- Redundant function, added for consistency.
-fn dot_ms vAB vCD=
-    return dot vAB vCD
-
---  Cross product of vector vAB and vector vCD. Implemented in maxscript as 'cross'
--- Redundant function, added for consistency.
-fn cross_ms vAB vCD=
-    return cross vAB vCD
-
--- Normalize vector vAB
--- Redundant function, added for consistency.
-fn normalize_ms vAB=
-    return normalize vAB
-
 -- Normal of a plane defined by three points pA, pB, pC
 fn plane_normal pA pB pC=
     return normalize( cross (pB-pA) (pC-pA) )
-
--- Distance between point pA and point pB
--- Redundant function, added for consistency.
-fn distance_ms pA pB=
-    return distance pA pB
 
 -- Point at along% (0-1) between points pA and pB
 fn alongPoint pA pB along=
@@ -64,6 +24,14 @@ fn point_line_distance pA pB pC=
 fn is_point_on_line pA pB pC tolerance=
     return ((point_line_distance pA pB pC) <= tolerance)
 
+-- Intersection between two lines defined by a point (pA, pB) and a vector (a, b)
+fn line_line_intersect pA a pB b=
+(
+	local c = pB - pA
+	local cross1 = cross a b
+	local cross2 = cross c b
+	return pA + a * (dot cross2 cross1) / pow (length(cross1)) 2
+)
 -- Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
 fn plane_line_intersect pP pN pA vAB =
 (
@@ -83,20 +51,22 @@ fn plane_line_intersect pP pN pA vAB =
 
 fn unit_test=
 (
-    print ("magnitude [1,2,3]: " + magnitude [1,2,3] as string)
-    print ("add_ms [1,2,3] [4,5,6]: " + add_ms [1,2,3] [4,5,6] as string)
-    print ("sub [1,2,3] [4,5,6]: " + (sub [1,2,3] [4,5,6]) as string)
-    print ("mul [1,2,3] 0.5: " + (mul [1,2,3] 0.5) as string)
-    print ("dot_ms [1,2,3] [4,5,6]: " + (dot_ms [1,2,3] [4,5,6]) as string)
-    print ("cross_ms [1,2,3] [4,5,6]: " + (cross_ms [1,2,3] [4,5,6]) as string)
-    print ("normalize_ms [1,2,3]: " + (normalize_ms [1,2,3]) as string)
+    print ("magnitude [1,2,3]: " + (length [1,2,3]) as string)
+    print ("add_ms [1,2,3] [4,5,6]: " + ([1,2,3]+[4,5,6]) as string)
+    print ("sub [1,2,3] [4,5,6]: " + ([1,2,3]-[4,5,6]) as string)
+    print ("mul [1,2,3] 0.5: " + ([1,2,3]*0.5) as string)
+	print ("vec_mul [1,2,3] [3,4,5]: " + ([1,2,3]*[3,4,5]) as string)
+    print ("dot_ms [1,2,3] [4,5,6]: " + (dot [1,2,3] [4,5,6]) as string)
+    print ("cross_ms [1,2,3] [4,5,6]: " + (cross [1,2,3] [4,5,6]) as string)
+    print ("normalize_ms [1,2,3]: " + (normalize [1,2,3]) as string)
     print ("plane_normal [1,2,3] [4,5,6] [1,5,3]: " + (plane_normal [1,2,3] [4,5,6] [1,5,3]) as string)
-    print ("distance_ms [1,2,3] [4,5,6]: " + (distance_ms [1,2,3] [4,5,6]) as string)
+    print ("distance_ms [1,2,3] [4,5,6]: " + (distance [1,2,3] [4,5,6]) as string)
     print ("alongPoint [1,2,3] [4,5,6] 0.5: " + (alongPoint [1,2,3] [4,5,6] 0.5) as string)
     print ("point_line_projection [1,2,3] [4,5,6] [1,5,3]: " + (point_line_projection [1,2,3] [4,5,6] [1,5,3]) as string)
     print ("point_line_distance [1,2,3] [4,5,6] [1,5,3]: " + (point_line_distance [1,2,3] [4,5,6] [1,5,3]) as string)
     print ("is_point_on_line [1,2,3] [4,5,6] [7,8,9]: " + (is_point_on_line [1,2,3] [4,5,6] [7,8,9] 0.1) as string)
     print ("is_point_on_line [1,2,3] [4,5,6] [1,5,3]: " + (is_point_on_line [1,2,3] [4,5,6] [1,5,3] 0.1) as string)
+	print ("line_line_intersect([1,2,3], [1,0,0], [4,5,6], [0,1,0]): " + (line_line_intersect [1,2,3] [1,0,0] [4,5,6] [0,1,0]) as string)
     print ("plane_line_intersect [1,2,3] [1,0,0] [1,2,3] [4,5,6]: " + (plane_line_intersect [1,2,3] [1,0,0] [1,2,3] [4,5,6]) as string)
 )
 

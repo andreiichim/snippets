@@ -17,6 +17,10 @@ def sub(vAB, vCD):
 def mul(vAB, c):
     return [ i*c for i in vAB ]
 
+# vAB * vCD
+def vec_mul(vAB, vCD):
+    return [ vAB[i]*vCD[i] for i in range(len(vAB)) ]
+
 # Dot product of vector vAB and vector vCD
 def dot(vAB, vCD):
     return sum( vAB[i]*vCD[i] for i in range(len(vAB)) )
@@ -68,6 +72,13 @@ def point_line_distance(pA, pB, pC):
 def is_point_on_line(pA, pB, pC, tolerance):
     return (point_line_distance(pA, pB, pC) <= tolerance)
 
+# Intersection between two lines defined by a point (pA, pB) and a vector (a, b)
+def line_line_intersect(pA, a, pB, b):
+	c = sub(pB, pA)
+	cross1 = cross(a, b)
+	cross2 = cross(c, b)
+	return add( pA, mul( a, dot(cross2, cross1) / magnitude(cross1)**2 ) )
+
 # Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
 def plane_line_intersect(pP, pN, pA, vAB):
     vAB = normalize(vAB)
@@ -86,6 +97,7 @@ def unit_test():
     print ('add([1,2,3], [4,5,6]): ', add([1,2,3], [4,5,6]))
     print ('sub([1,2,3], [4,5,6]): ', sub([1,2,3], [4,5,6]))
     print ('mul([1,2,3], 0.5): ', mul([1,2,3], 0.5))
+    print ('vec_mul([1,2,3], [3,4,5]): ', vec_mul([1,2,3], [3,4,5]))
     print ('dot([1,2,3], [4,5,6]): ', dot([1,2,3], [4,5,6]))
     print ('cross([1,2,3], [4,5,6]): ', cross([1,2,3], [4,5,6]))
     print ('normalize([1,2,3]): ', normalize([1,2,3]))
@@ -96,6 +108,7 @@ def unit_test():
     print ('point_line_distance([1,2,3], [4,5,6], [1,5,3]): ', point_line_distance([1,2,3], [4,5,6], [1,5,3]))
     print ('is_point_on_line([1,2,3], [4,5,6], [7,8,9]): ', is_point_on_line([1,2,3], [4,5,6], [7,8,9], 0.1))
     print ('is_point_on_line([1,2,3], [4,5,6], [1,5,3]): ', is_point_on_line([1,2,3], [4,5,6], [1,5,3], 0.1))
+    print ('line_line_intersect([1,2,3], [1,0,0], [4,5,6], [0,1,0]): ', line_line_intersect([1,2,3], [1,0,0], [4,5,6], [0,1,0]))
     print ('plane_line_intersect([1,2,3], [1,0,0], [1,2,3], [4,5,6]): ', plane_line_intersect([1,2,3], [1,0,0], [1,2,3], [4,5,6]))
 
 if __name__ == '__main__':
