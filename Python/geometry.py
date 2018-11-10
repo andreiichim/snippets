@@ -74,10 +74,10 @@ def is_point_on_line(pA, pB, pC, tolerance):
 
 # Intersection between two lines defined by a point (pA, pB) and a vector (a, b)
 def line_line_intersect(pA, a, pB, b):
-	c = sub(pB, pA)
-	cross1 = cross(a, b)
-	cross2 = cross(c, b)
-	return add( pA, mul( a, dot(cross2, cross1) / magnitude(cross1)**2 ) )
+    c = sub(pB, pA)
+    cross1 = cross(a, b)
+    cross2 = cross(c, b)
+    return add( pA, mul( a, dot(cross2, cross1) / magnitude(cross1)**2 ) )
 
 # Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
 def plane_line_intersect(pP, pN, pA, vAB):

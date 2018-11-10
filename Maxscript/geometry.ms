@@ -27,10 +27,10 @@ fn is_point_on_line pA pB pC tolerance=
 -- Intersection between two lines defined by a point (pA, pB) and a vector (a, b)
 fn line_line_intersect pA a pB b=
 (
-	local c = pB - pA
-	local cross1 = cross a b
-	local cross2 = cross c b
-	return pA + a * (dot cross2 cross1) / pow (length(cross1)) 2
+    local c = pB - pA
+    local cross1 = cross a b
+    local cross2 = cross c b
+    return pA + a * (dot cross2 cross1) / pow (length(cross1)) 2
 )
 -- Intersection between a line (defined by point pA and vector vAB) and a plane (defined by point pP and normal pN)
 fn plane_line_intersect pP pN pA vAB =
@@ -55,7 +55,7 @@ fn unit_test=
     print ("add_ms [1,2,3] [4,5,6]: " + ([1,2,3]+[4,5,6]) as string)
     print ("sub [1,2,3] [4,5,6]: " + ([1,2,3]-[4,5,6]) as string)
     print ("mul [1,2,3] 0.5: " + ([1,2,3]*0.5) as string)
-	print ("vec_mul [1,2,3] [3,4,5]: " + ([1,2,3]*[3,4,5]) as string)
+    print ("vec_mul [1,2,3] [3,4,5]: " + ([1,2,3]*[3,4,5]) as string)
     print ("dot_ms [1,2,3] [4,5,6]: " + (dot [1,2,3] [4,5,6]) as string)
     print ("cross_ms [1,2,3] [4,5,6]: " + (cross [1,2,3] [4,5,6]) as string)
     print ("normalize_ms [1,2,3]: " + (normalize [1,2,3]) as string)
@@ -66,7 +66,7 @@ fn unit_test=
     print ("point_line_distance [1,2,3] [4,5,6] [1,5,3]: " + (point_line_distance [1,2,3] [4,5,6] [1,5,3]) as string)
     print ("is_point_on_line [1,2,3] [4,5,6] [7,8,9]: " + (is_point_on_line [1,2,3] [4,5,6] [7,8,9] 0.1) as string)
     print ("is_point_on_line [1,2,3] [4,5,6] [1,5,3]: " + (is_point_on_line [1,2,3] [4,5,6] [1,5,3] 0.1) as string)
-	print ("line_line_intersect([1,2,3], [1,0,0], [4,5,6], [0,1,0]): " + (line_line_intersect [1,2,3] [1,0,0] [4,5,6] [0,1,0]) as string)
+    print ("line_line_intersect([1,2,3], [1,0,0], [4,5,6], [0,1,0]): " + (line_line_intersect [1,2,3] [1,0,0] [4,5,6] [0,1,0]) as string)
     print ("plane_line_intersect [1,2,3] [1,0,0] [1,2,3] [4,5,6]: " + (plane_line_intersect [1,2,3] [1,0,0] [1,2,3] [4,5,6]) as string)
 )
 
