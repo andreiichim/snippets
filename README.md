@@ -7,4 +7,4 @@
 
 ## BasicUI
   - [x] PySide
-  - [ ] PySide2
+  - [X] PySide2
